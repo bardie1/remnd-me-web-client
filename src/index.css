@@ -7,6 +7,60 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.618;
+}
+
+button {
+  cursor: pointer;
+}
+
+button.unfilled {
+  background-color: transparent;
+  border: 2px solid black;
+  color: black;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+button.unfilled:hover {
+  background-color: black;
+  color: white;
+}
+
+button.filled {
+  background-color: #00C6A2;
+  border: 2px solid #00C6A2;
+  color: black;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+button.filled:hover {
+  filter: brightness(95%);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-group > label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.input-group > input {
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #00C6A2;
+  background-color: rgb(249, 252, 251);
+  padding: 0.5rem;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
