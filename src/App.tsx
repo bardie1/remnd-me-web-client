@@ -1,25 +1,40 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route
+  BrowserRouter as Router
 } from "react-router-dom";
 import './App.css';
 import Auth from './components/auth/Auth';
+import BaseApp from './components/baseApp/BaseApp';
+import { UserContext } from "./context/userContext";
+import { sessionService } from './services/session';
 
+interface IAppProps {
+}
 
-function App() {
+const App: React.FunctionComponent<IAppProps> = (props) => {
+
+  const userContext = useContext(UserContext);
+
+  useEffect(() => {
+    if (sessionService.getUser()) {
+      userContext.login(sessionService.getUser());
+    };
+  })
+
   return (
     <Router>
-    <div className="App">
-      <Switch>
-        <Route path={["/login", "/signup"]}>
+      <div className="App">
+
+        {
+          userContext?.user ?
+          <BaseApp />
+          :
           <Auth />
-        </Route>
-      </Switch>
-    </div>
+        }
+        
+      </div>
     </Router>
   );
-}
+};
 
 export default App;

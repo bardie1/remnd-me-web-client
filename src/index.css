@@ -41,6 +41,12 @@ button.filled:hover {
   filter: brightness(95%);
 }
 
+button:disabled {
+  background-color: rgb(206, 206, 206);
+  border-color: rgb(206, 206, 206);
+  color: rgb(138, 138, 138);
+}
+
 .input-group {
   display: flex;
   flex-direction: column;

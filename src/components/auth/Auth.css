@@ -59,10 +59,14 @@
 }
 
 .auth-right > form input {
-    width: 100%;
+    width: 98%;
 }
 
 .auth-right > form > button {
     font-size: 1.5rem;
     margin-top: 1rem;
+}
+
+#auth-loader-holder {
+    width: 100%;
 }
