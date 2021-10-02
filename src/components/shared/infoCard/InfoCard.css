@@ -1,0 +1,43 @@
+#info-card-container {
+    height: fit-content;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: 500;
+}
+
+#info-card-text {
+    width: calc(100% - 4rem);
+    margin: 0.8rem 2rem 0.8rem 2rem;
+}
+
+#info-card-container.success {
+    background-color: rgb(178, 237, 178);
+    color: rgb(0, 94, 0);
+}
+
+#info-card-container.error {
+    background-color: rgb(255, 230, 230);
+    color: rgb(118, 0, 0);
+}
+
+#info-card-container.warning {
+    background-color: rgb(255, 243, 218);
+    color: rgb(194, 107, 0);
+}
+
+#info-card-container.info {
+    background-color: rgb(227, 245, 255);
+    color:  rgb(0, 83, 128);
+}
+
+#info-card-text.left {
+    text-align: left;
+}
+
+#info-card-text.center {
+    text-align: center;
+}
+
+#info-card-text.right {
+    text-align: right;
+}
