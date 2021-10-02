@@ -1,0 +1,20 @@
+.loader {
+    margin:auto;
+    border-radius:50%;
+    background:conic-gradient(#0000 10%,#808080);
+    -webkit-mask:radial-gradient(farthest-side,#0000 calc(100% - 6px),#000 0);
+    animation:s3 1s infinite linear;
+  }
+
+  .loader.black {
+    background:conic-gradient(#0000 10%, black);
+  }
+
+  .loader.green {
+    background:conic-gradient(#0000 10%, #00C6A2);
+  }
+
+  .loader.white {
+    background:conic-gradient(#0000 10%, white);
+  }
+  @keyframes s3 {to{transform: rotate(1turn)}}
