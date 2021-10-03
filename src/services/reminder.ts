@@ -11,7 +11,12 @@ class ReminderService extends ApiProtected {
     public getReminders = (): Promise<AxiosResponse<Reminder[]>> => {
         return this.instance.get<Reminder[]>("reminders", {
             transformResponse: [(data) => {
-                return ObjectUtil.convertObjectsInArray<Reminder>(JSON.parse(data), Reminder);
+                let dataParsed = JSON.parse(data);
+                if (dataParsed.isError) {
+                    return dataParsed;
+                } else {
+                    return ObjectUtil.convertObjectsInArray<Reminder>(JSON.parse(data), Reminder);
+                }
             }]
         });
     }

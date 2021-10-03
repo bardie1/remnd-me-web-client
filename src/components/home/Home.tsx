@@ -10,7 +10,7 @@ const Home: React.FunctionComponent<IHomeProps> = (props) => {
 
     React.useEffect(() => {
         ReminderService.getReminders().then((res: AxiosResponse<Reminder[]>) => console.log(res)).catch((error: any) => console.log(error));
-    })
+    },[]);
   return (
       <div>Home</div>
   );

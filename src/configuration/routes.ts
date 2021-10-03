@@ -1,3 +1,4 @@
+import Account from "../components/account/Account";
 import Home from "../components/home/Home";
 
 const routes = [
@@ -9,6 +10,11 @@ const routes = [
     {
         path: '/home',
         component: Home,
+        exact: true
+    },
+    {
+        path: '/account',
+        component: Account,
         exact: true
     }
 ]

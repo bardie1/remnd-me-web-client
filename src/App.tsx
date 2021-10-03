@@ -19,7 +19,7 @@ const App: React.FunctionComponent<IAppProps> = (props) => {
     if (sessionService.getUser()) {
       userContext.login(sessionService.getUser());
     };
-  })
+  }, [])
 
   return (
     <Router>

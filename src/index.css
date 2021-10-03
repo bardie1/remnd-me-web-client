@@ -10,6 +10,8 @@ body {
 * {
   font-family: 'Poppins', sans-serif;
   line-height: 1.618;
+  margin: 0;
+  padding: 0;
 }
 
 button {
@@ -64,6 +66,10 @@ button:disabled {
   border-bottom: 2px solid #00C6A2;
   background-color: rgb(249, 252, 251);
   padding: 0.5rem;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #313131;
 }
 
 

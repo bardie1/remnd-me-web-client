@@ -20,7 +20,9 @@ export abstract class HttpClient {
         )
     }
 
-    private _handleResponse = (data: AxiosResponse) => data;
+    private _handleResponse = (res: AxiosResponse) => {
+        return res;
+    };
 
     private _handleError = (error: any) => Promise.reject(error);
 

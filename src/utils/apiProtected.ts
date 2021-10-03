@@ -15,7 +15,6 @@ export default class ApiProtected extends HttpClient {
     };
 
     private _handleRequest = (config: AxiosRequestConfig) => {
-        console.log(config);
         config.headers['x-access-token'] = sessionService.getUser().tokens.token;
         return config;
     }
