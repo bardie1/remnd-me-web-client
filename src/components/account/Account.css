@@ -1,21 +1,60 @@
+#account-container * {
+    text-align: left;
+}
+
 #account-container {
     margin-top: 50px;
 }
 
-#account-info-header {
+.section-header {
     text-align: left;
     border-bottom: 1px solid #e2e2e2;
+}
+
+.section-data {
+    margin-top: 2rem;
+    margin-left: 3%;
 }
 
 #account-info-container {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    height: 300px;
+    margin-bottom: 50px;
 }
+
+#account-container label {
+    margin-right: 10px;
+}
+
 
 #account-phone-numbers-container {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+}
+
+#account-username-holder {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 3rem;
+}
+
+#account-password-holder .input-group-row {
+    margin-bottom: 17px;
+}
+
+#account-password-holder .input-group-row:last-of-type {
+    margin-bottom: 24px;
+}
+
+button#change-password {
+    padding: 5px 10px;
+}
+button#process-change-password {
+    padding: 5px 10px;
+}
+
+button#cancel-change-password {
+    margin-right: 20px;
 }
