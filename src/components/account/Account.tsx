@@ -48,7 +48,8 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
               <div id="account-info-data" className="section-data">
                 <div id="account-username-holder">
                     <label htmlFor="account-username">Username:</label>
-                    <span id="account-username" onChange={(e) => setUsername((e.currentTarget.textContent)? e.currentTarget.textContent : '')} onBlur={(e) => setShowUsernameEdit(true)} onFocus={(e) => moveCursorToEnd(e)} className="ghost-input" contentEditable role="textbox" placeholder="Enter Username">{username}</span> { showUsernameEdit && <span onClick={() => focusOnInput('account-username')}><EditIcon style={{ color: "606060", fontSize: '18px', paddingLeft: "5px"}} /></span>}
+                    {/* <span id="account-username" onChange={(e) => setUsername((e.currentTarget.textContent)? e.currentTarget.textContent : '')} onBlur={(e) => setShowUsernameEdit(true)} onFocus={(e) => moveCursorToEnd(e)} className="ghost-input" contentEditable role="textbox" placeholder="Enter Username">{username}</span> { showUsernameEdit && <span onClick={() => focusOnInput('account-username')}><EditIcon style={{ color: "606060", fontSize: '18px', paddingLeft: "5px"}} /></span>} */}
+                    <span id="account-username">{username}</span>
                     {/* <input value={username} onChange={(e) => setUsername(e.target.value)} className="ghost" type="text"/> */}
                 </div>
                 <div id="account-password-holder">
