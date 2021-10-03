@@ -10,7 +10,7 @@ import AuthService from "../../services/auth";
 import { AxiosError, AxiosResponse } from 'axios';
 import Loader from '../shared/loader/Loader';
 import InfoCard from '../shared/infoCard/InfoCard';
-const axios = require('axios').default;
+import { User } from '../../models/user';
 
 
 
@@ -44,7 +44,7 @@ const Auth: React.FunctionComponent<IAuthProps> = (props) => {
     useEffect(() => {
         if (username && password) {
             setFormValid(true);
-            if (!loginState && !confirmPassword) {
+            if (!loginState && confirmPassword !== password) {
                 setFormValid(false);
             }
         } else {
@@ -56,8 +56,14 @@ const Auth: React.FunctionComponent<IAuthProps> = (props) => {
 
     const signUp = () => {
         setErrorMessage(null);
-        axios.post("http://localhost:4141/users", {username: username, password: password})
-        .then((res: any) => login()).catch((err:any) => console.log(err.message));
+        setLoading(true);
+        AuthService.signUp(username,password)
+        .then((res: AxiosResponse<User>) => {
+            login();
+        }).catch((error: AxiosError) => {
+            setLoading(false);
+            setErrorMessage(error.response?.data.message)}
+        );
     }
 
     const login = () => {
@@ -118,7 +124,8 @@ const Auth: React.FunctionComponent<IAuthProps> = (props) => {
                 {(loginState) ? 'Login' : 'Sign Up'}
             </div>
             {
-                errorMessage && <InfoCard text={errorMessage} alignment="center" cardType="error" />
+                errorMessage && 
+                    <InfoCard style={{marginBottom: "1rem"}} text={errorMessage} alignment="center" cardType="error" />
             }
             <div className="input-group">
                 <label htmlFor="auth-username">Username</label>
@@ -139,11 +146,19 @@ const Auth: React.FunctionComponent<IAuthProps> = (props) => {
             {
                 loading ?
                 <div id="auth-loader-holder">
-                    <Loader color="green" size="50px"/>
+                    <Loader color="green" size="35px"/>
                 </div> 
                 : 
                 <button disabled={!formValid ? true : false} className="filled" onClick={e => execute(e)}>{(loginState)? 'Login' : 'Sign Up'}</button>
             }
+            <div id="form-switch-holder">
+                {
+                    loginState ? 
+                        <p>Don't have an account? <span onClick={() => changeLoginState()}>Sign Up</span></p>
+                    :
+                        <p>Already have an account with us? <span onClick={() => changeLoginState()}>Login</span></p>
+                }
+            </div>
         </form>
     </div>
 </div>
