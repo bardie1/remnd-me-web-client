@@ -1,0 +1,70 @@
+#header-container {
+    width: 100vw;
+    background-color: rgb(227, 245, 241);
+    height: 60px;
+}
+
+#header-content {
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header-logo img {
+    width: 120px;
+}
+
+
+#header-user-menu {
+    display: flex;
+    width: fit-content;
+    cursor: pointer;
+}
+
+#header-username {
+    font-weight: 500;
+}
+
+#menu-popup {
+    position: fixed;
+    top: 52px;
+    right: 2%;
+    background-color: white;
+    width: fit-content;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgb(232, 232, 232);
+}
+
+#menu-popup ul {
+    border-radius: inherit;
+}
+#menu-popup ul li:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+#menu-popup ul li:last-child {
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+}
+
+#menu-popup li {
+    justify-content: left;
+    font-size: 0.9rem;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#menu-popup li:hover {
+   color: #00C6A2;
+   background-color: rgb(241, 249, 248);
+}
+
+#menu-popup li span{
+    margin-left: 10px;
+}
