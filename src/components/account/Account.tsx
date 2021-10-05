@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { UserContext } from '../../context/userContext';
-import EditIcon from '@mui/icons-material/Edit';
 import "./Account.css";
+import AccountPhoneItem from '../accountPhoneItem/AccountPhoneItem';
 interface IAccountProps {
 }
 
@@ -15,32 +15,6 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
     const [showUsernameEdit, setShowUsernameEdit] = React.useState<boolean>(true);
     const [showChangePasswordForm, setShowChangePasswordForm] = React.useState<boolean>(false);
 
-    const focusOnInput = (inputId: string) => {
-        let i = document.getElementById(inputId);
-        i?.focus();
-    }
-
-    function setEndOfContenteditable(contentEditableElement:any)
-{
-    var range,selection;
-    if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
-    {
-        range = document.createRange();//Create a range (a range is a like the selection but invisible)
-        range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
-        range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
-        selection = window.getSelection();//get the selection object (allows you to change selection)
-        if (selection) {
-            selection.removeAllRanges();//remove any selections already made
-            selection.addRange(range);//make the range you have just created the visible selection
-        }
-    }
-}
-
-    const moveCursorToEnd = (e:React.FocusEvent<HTMLSpanElement>) =>{
-        setShowUsernameEdit(false);
-       setEndOfContenteditable(e.target);
-    }
-
   return (
       <div id="account-container">
           <div id="account-info-container">
@@ -48,7 +22,6 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
               <div id="account-info-data" className="section-data">
                 <div id="account-username-holder">
                     <label htmlFor="account-username">Username:</label>
-                    {/* <span id="account-username" onChange={(e) => setUsername((e.currentTarget.textContent)? e.currentTarget.textContent : '')} onBlur={(e) => setShowUsernameEdit(true)} onFocus={(e) => moveCursorToEnd(e)} className="ghost-input" contentEditable role="textbox" placeholder="Enter Username">{username}</span> { showUsernameEdit && <span onClick={() => focusOnInput('account-username')}><EditIcon style={{ color: "606060", fontSize: '18px', paddingLeft: "5px"}} /></span>} */}
                     <span id="account-username">{username}</span>
                     {/* <input value={username} onChange={(e) => setUsername(e.target.value)} className="ghost" type="text"/> */}
                 </div>
@@ -81,6 +54,10 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
 
           <div id="account-phone-numbers-container">
               <h2 id="account-info-header" className="section-header">Phone Numbers</h2>
+              <div id="phone-info-data" className="section-data">
+                <AccountPhoneItem />
+
+              </div>
           </div>
       </div>
   );
