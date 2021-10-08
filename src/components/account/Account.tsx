@@ -2,6 +2,9 @@ import * as React from 'react';
 import { UserContext } from '../../context/userContext';
 import "./Account.css";
 import AccountPhoneItem from '../accountPhoneItem/AccountPhoneItem';
+import PhoneService from "../../services/phone";
+import { Phone } from '../../models/phone';
+import { AxiosResponse } from 'axios';
 interface IAccountProps {
 }
 
@@ -14,6 +17,22 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
     const [confirmNewPassword, setConfirmNewPassword] = React.useState<string>('');
     const [showUsernameEdit, setShowUsernameEdit] = React.useState<boolean>(true);
     const [showChangePasswordForm, setShowChangePasswordForm] = React.useState<boolean>(false);
+    const [phoneNumbers, setPhoneNumbers] = React.useState<Phone[]>([]);
+
+    React.useEffect(() => {
+
+        PhoneService.getPhoneNumbers()
+            .then((res: AxiosResponse<Phone[]>) => {
+                setPhoneNumbers(res.data);
+                console.log(res.data);
+            }).catch(err => {
+                console.log(err);
+            }) 
+
+        return () => {
+
+        }
+    }, [])
 
   return (
       <div id="account-container">
@@ -55,7 +74,13 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
           <div id="account-phone-numbers-container">
               <h2 id="account-info-header" className="section-header">Phone Numbers</h2>
               <div id="phone-info-data" className="section-data">
-                <AccountPhoneItem />
+
+                {
+                    phoneNumbers.map((p, idx) => {
+                        return (<AccountPhoneItem newNumber={false} phone={p} identifier={p.externalRef || idx} key={p.externalRef} />)
+                    })
+                }
+                <AccountPhoneItem newNumber={true} identifier={'new'} />
 
               </div>
           </div>

@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { Phone } from "../models/phone";
 import ApiProtected from "../utils/apiProtected";
+import { ObjectUtil } from "../utils/objectUtil";
 
 class PhoneService extends ApiProtected {
     public constructor(){
@@ -13,6 +14,19 @@ class PhoneService extends ApiProtected {
                 return new Phone(data);
             }]
         });
+    }
+
+    public getPhoneNumbers = () : Promise<AxiosResponse<Phone[]>> => {
+        return this.instance.get<Phone[]>("phone-numbers", {
+            transformResponse: [(data) => {
+                let dataParsed = JSON.parse(data);
+                if (dataParsed.isError) {
+                    return dataParsed;
+                } else {
+                    return ObjectUtil.convertObjectsInArray<Phone>(JSON.parse(data), Phone);
+                }
+            }]
+        })
     }
 
     public editPhoneNumber = (phone: Phone) : Promise<AxiosResponse<Phone>> => {
