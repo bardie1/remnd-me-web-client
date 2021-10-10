@@ -1,0 +1,35 @@
+.reminder-item-container {
+    width: 70%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.reminder-item-top-row {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 70px);
+    justify-content: space-between;
+}
+
+.reminder-item-action-holder {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.reminder-item-title {
+    font-weight: 600;
+}
+
+.reminder-item-view-details {
+    width: fit-content;
+    text-align: left;
+}
+
+.reminder-item-data-holder {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
