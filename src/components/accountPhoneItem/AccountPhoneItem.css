@@ -11,7 +11,8 @@
     cursor: pointer;
 }
 .account-phone-item .account-phone-input-holder {
-    
+    display: flex;
+    align-items: center;
 }
 
 .account-phone-item .send-code {
@@ -64,6 +65,33 @@ kbd {
     color: rgb(215, 0, 0) !important;
     cursor: pointer;
     animation: wiggle 500ms linear;
+}
+
+.account-phone-item input.num {
+    width: 6.5rem;
+}
+
+.account-phone-item input.num.empty {
+    width: 9rem;
+}
+
+.del-modal-actions {
+    margin-top: 20px;
+    display: flex;
+}
+
+.del-modal-actions .confirm {
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+
+.del-modal-actions .cancel {
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.delete-modal-header {
+    margin-bottom: 15px;
 }
 
 @keyframes wiggle {

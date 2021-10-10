@@ -4,7 +4,7 @@ import "./Account.css";
 import AccountPhoneItem from '../accountPhoneItem/AccountPhoneItem';
 import PhoneService from "../../services/phone";
 import { Phone } from '../../models/phone';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
 interface IAccountProps {
 }
 
@@ -33,6 +33,48 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
 
         }
     }, [])
+
+
+    const createPhone = (phone: Phone): Promise<any> => {
+        return new Promise((resolve, reject) => {
+            PhoneService.createPhoneNumber(phone.phoneNumber || '')
+                .then((res: AxiosResponse<Phone>) => {
+                    
+                    setPhoneNumbers([...phoneNumbers, res.data]);
+                    resolve(true);
+                })
+                .catch((err: AxiosError) => {
+                    reject(err);
+                })
+        }) 
+    }
+
+    const updatePhone = (phone: Phone): Promise<any> => {
+        return new Promise((resolve, reject) => {
+            PhoneService.updatePhoneNumber(phone)
+                .then((res: AxiosResponse<Phone>) => {
+                    let copiedArr: Phone[] = phoneNumbers.slice();
+                    let index = copiedArr.findIndex(p => p.externalRef === res.data.externalRef);
+                    if (index > -1){
+                        copiedArr[index] = res.data;
+                        setPhoneNumbers(copiedArr);
+                    }
+                    resolve(true);
+                })
+                .catch((err: AxiosError) => {
+                    reject(err);
+                })
+        }) 
+    }
+
+    const updatePhoneState = (phone: Phone) => {
+        let copiedArr: Phone[] = phoneNumbers.slice();
+        let index = copiedArr.findIndex(p => p.externalRef === phone.externalRef);
+        if (index > -1){
+            copiedArr[index] = phone;
+            setPhoneNumbers(copiedArr);
+        }
+    }
 
   return (
       <div id="account-container">
@@ -77,10 +119,10 @@ const Account: React.FunctionComponent<IAccountProps> = (props) => {
 
                 {
                     phoneNumbers.map((p, idx) => {
-                        return (<AccountPhoneItem newNumber={false} phone={p} identifier={p.externalRef || idx} key={p.externalRef} />)
+                        return (<AccountPhoneItem updatePhoneState={updatePhoneState} upsertPhone={updatePhone} newNumber={false} phone={p} identifier={p.externalRef || idx} key={p.externalRef} />)
                     })
                 }
-                <AccountPhoneItem newNumber={true} identifier={'new'} />
+                <AccountPhoneItem upsertPhone={createPhone} newNumber={true} identifier={'new'} />
 
               </div>
           </div>

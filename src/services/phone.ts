@@ -8,10 +8,15 @@ class PhoneService extends ApiProtected {
         super()
     }
 
-    public createPhoneNumber = (phoneNumber: string, phoneExtension:string):Promise<AxiosResponse<Phone>> => {
-        return this.instance.post<any>("phone-numbers", {phoneNumber: phoneNumber, phoneExtension: phoneExtension}, {
+    public createPhoneNumber = (phoneNumber: string):Promise<AxiosResponse<Phone>> => {
+        return this.instance.post<Phone>("phone-numbers", {phoneNumber: phoneNumber, phoneExtension: null}, {
             transformResponse: [(data) => {
-                return new Phone(data);
+                let dataParsed = JSON.parse(data);
+                if (dataParsed.isError) {
+                    return dataParsed;
+                } else {
+                    return new Phone(dataParsed);
+                }
             }]
         });
     }
@@ -29,7 +34,7 @@ class PhoneService extends ApiProtected {
         })
     }
 
-    public editPhoneNumber = (phone: Phone) : Promise<AxiosResponse<Phone>> => {
+    public updatePhoneNumber = (phone: Phone) : Promise<AxiosResponse<Phone>> => {
         return this.instance.put<Phone>("phone-numbers", phone, {
             transformResponse: [(data) => {
                 return new Phone(data);
@@ -49,10 +54,20 @@ class PhoneService extends ApiProtected {
         return this.instance.post<any>("phone-numbers/send-verification-code",phone);
     }
 
-    public verifyCode = (code: string): Promise<AxiosResponse<Phone>> => {
-        return this.instance.post<Phone>("phone-numbers/verify", {code: code}, {
+    public verifyCode = (phone: Phone, code: string): Promise<AxiosResponse<Phone>> => {
+        let body = {...phone} as any;
+        body.code = code;
+        return this.instance.post<Phone>("phone-numbers/verify", body, {
             transformResponse: [(data) => {
-                return new Phone(data);
+                let dataParsed = JSON.parse(data);
+                if (dataParsed.isError) {
+                    return dataParsed;
+                } else {
+                    if (dataParsed.verified === false) {
+                        return dataParsed
+                    }
+                    return new Phone(dataParsed);
+                }
             }]
         });
     }
