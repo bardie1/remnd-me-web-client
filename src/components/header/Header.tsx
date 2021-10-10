@@ -23,6 +23,10 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     if (clickedOutside) {
       setShowMenu(false);
     }
+
+    return () => {
+
+    }
   }, [clickedOutside])
 
   const logout = () => {
@@ -33,7 +37,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
       <div id="header-container">
         <div id="header-content">
           <div id="header-logo">
-            <img src={logo} alt="remnd me logo"/>
+            <img src={logo} alt="remnd me logo" onClick={() => history.push("/home")}/>
           </div>
           <div ref={triggerRef} onClick={() => setShowMenu(!showMenu)} id="header-user-menu">
             <div id="header-username">
